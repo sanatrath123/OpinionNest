@@ -6,8 +6,8 @@ function Button ({
     textColor = "text-white",
     ...props
 
-}){
-   
+})
+{
    
     return (
         <button className={`py-2 px-3 rounded-lg ${Bgcolor} ${className} ${textColor}`}  {...props}>
