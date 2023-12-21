@@ -4,6 +4,7 @@ import Footer from "./footer/Footer"
 import Container from "./Container"
 import Input from "./Input"
 import Button from "./Button"
+import PostCard from "./PostCard"
 
 
 
@@ -13,5 +14,7 @@ export {
     Footer,
     Container,
     Input,
-    Button
+    Button,
+    PostCard,
+    
 }
