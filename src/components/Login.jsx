@@ -41,6 +41,8 @@ const login = async (data)=>{
              <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
  
  <Link to={`/Singup`}> <p>DONT HAVE AN ACCOUNT</p>  </Link>
+
+ {error && <h2 className="text-red-600 text-center text-lg">{error}</h2>}
        
        <form onSubmit={handelsubmit(login)} className="mt-8">
         <div className="space-y-5">
