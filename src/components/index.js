@@ -9,7 +9,7 @@ import Protected from "./Authprotection"
 import Login from "./Login"
 import Signup from "./Signup"
 import Select from "./Select"
-
+import RTE from "./RTE"
 
 
 export {
@@ -23,6 +23,7 @@ export {
     Protected,
     Login,
     Signup,
-    Select 
+    Select,
+    RTE
     
 }
