@@ -10,6 +10,9 @@ import Login from "./Login"
 import Signup from "./Signup"
 import Select from "./Select"
 import RTE from "./RTE"
+import UploadForm from "./UploadForm"
+
+
 
 
 export {
@@ -24,6 +27,7 @@ export {
     Login,
     Signup,
     Select,
-    RTE
+    RTE,
+    UploadForm
     
 }

@@ -4,13 +4,13 @@ import useForm from 'react-hook-form'
 import service from '../appwrite/Config'
 import { useSelector } from 'react-redux'
 import { useNavigate  } from 'react-router-dom'
-import { Service } from 'appwrite/types/service'
+
 
 function UploadForm({post}) {
 
  const userData = useSelector((state)=>state.Auth.UserData)
   const navigate = useNavigate()
-  const {register , handelSubmit , setValue , getValues , watch , control}
+  const {register , handleSubmit , setValue , getValues , watch , control}
   = useForm({
   defaultValues: 
   {
@@ -63,13 +63,18 @@ const slugTransform = useCallback((value) => {
 }, []);
 
 useEffect(()=>{
-  const suncription = watch()
-})
+  const subscription = watch((value ,{name})=>{
+    if(name==="title"){
+      setValue("slug",slugTransform(value.title) , { shouldValidate: true })
+    }
+    return () => subscription.unsubscribe();
+  })
+},[watch , setValue , slugTransform ])
 
 
   return (
     
- <form onSubmit={handelSubmit(Submit)} className='flex flex-wrap bg-pink-100'>
+ <form onSubmit={handleSubmit(Submit)} className='flex flex-wrap bg-pink-100'>
  <div className='w-2/3 bg-pink-200  m-1 p-1'>
 <Input
 label="TITLE"
@@ -109,6 +114,7 @@ accept="image/png, image/jpg, image/jpeg, image/gif"
   className="rounded-lg"
   />
 </div>)
+}
 
 <Select
 options={["active", "inactive"]}
@@ -120,7 +126,7 @@ className="mb-4"
 {post ? "Update" : "Submit"}
 </Button>
 
-}
+
 
  </div>
 
@@ -133,3 +139,5 @@ className="mb-4"
 }
 
 export default UploadForm
+
+

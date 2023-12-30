@@ -47,7 +47,7 @@ async deletePost({slug}){
     }
 
 }
-//read all post 
+//read post 
 async getPost({slug}){
   try {
     return await this.databases.listDocument(
@@ -61,7 +61,7 @@ async getPost({slug}){
   }
     }
 
-//readall post 
+//read all post 
 async getAllPost(quaries= Query.equal["status", "Active"]){
     try {
         return await this.databases.listDocuments(
