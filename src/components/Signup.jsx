@@ -5,13 +5,13 @@ import { useNavigate , Link} from "react-router-dom";
 import { Input, Button } from "./index";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {useForm }from "react-hook-form"
+import {useForm } from "react-hook-form"
 
 function Signup (){
 const Navigate = useNavigate()
 const dispatch = useDispatch()
 const [error , setError] = useState()
-const [register , handelSubmit] = useForm()
+const {register , handleSubmit} = useForm()
 
 
     const create = async (Data)=>{
@@ -54,7 +54,7 @@ const [register , handelSubmit] = useForm()
 
                {error && <h2 className="text-bold text-center text-red-600">{error}</h2>}
 
-         <form onSubmit={handelSubmit(create)}>
+         <form onSubmit={handleSubmit(create)}>
          <div className='space-y-5'>
           <Input
            label="Email"
@@ -80,7 +80,9 @@ const [register , handelSubmit] = useForm()
           {required: true})}
            />
 
-         <Button type="submit">SIGNUP</Button>
+<Button type="submit" className="w-full">
+                            Create Account
+                        </Button>
 
 </div>
            </form>

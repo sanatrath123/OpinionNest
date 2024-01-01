@@ -25,7 +25,7 @@ dispatch(logout())
   }
   ).finally(()=>
 setloader(false))
-  },[])
+  })
 
 
   return !loader ? (

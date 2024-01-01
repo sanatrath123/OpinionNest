@@ -31,13 +31,21 @@ async login({email , password}){
 
 //create getcurrent user 
 async getCurrentUser(){
-try {
-    await this.account.get()
-} catch (error) {
-    console.log("ERROR IN GETCURRENTUSER",error)
+try { 
+    
+   const User= await this.account.get()
+   if(User){
+    console.log(User)
+    return User
+   }
 }
+ catch (error) {
+    console.log("ERROR IN GET CURRENT USER",error)
+}
+console.log("End")
 return null;
 }
+
 //logout 
 async logout(){
     try {
@@ -45,6 +53,7 @@ async logout(){
     } catch (error) {
         console.log("ERROR IN LOGOUT METHORD")
     }
+   
 }
 
 }

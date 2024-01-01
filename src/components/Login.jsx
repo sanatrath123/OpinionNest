@@ -1,30 +1,32 @@
 import { useState } from "react"
 import { Link , useNavigate } from "react-router-dom"
-import {Input , Button } from "../components/index"
+import {Input , Button } from "./index"
 import {login as authlogin} from "../store/authslice"
 import authservice from "../appwrite/Auth"
 import { useDispatch } from "react-redux"
-import useForm from "react-hook-form"
+import { useForm} from "react-hook-form"
 
 
 function Login(){
- 
-    const[register , handelsubmit] = useForm()
-    const Navigate = useNavigate
+  const {register , handleSubmit} = useForm()
+    const Navigate = useNavigate()
     const dispatch = useDispatch()
     const [error , setError] = useState("")
 
 // handelsubmit function 
 const login = async (data)=>{
     setError(null)
+    console.log("start login")
   try {
     const session = await authservice.login(data)
+    console.log(" data came from auth.js")
     if(session) {
         const userdata = await authservice.getCurrentUser()
-    
+        console.log(" user Logedin")
     if(userdata){
         dispatch(authlogin(userdata))
         Navigate("/")
+        console.log(" login End")
     }
     }
   } catch (error) {
@@ -44,7 +46,7 @@ const login = async (data)=>{
 
  {error && <h2 className="text-red-600 text-center text-lg">{error}</h2>}
        
-       <form onSubmit={handelsubmit(login)} className="mt-8">
+       <form onSubmit={handleSubmit(login)} className="mt-8">
         <div className="space-y-5">
        <Input
         type="email"
