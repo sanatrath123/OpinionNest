@@ -5,7 +5,7 @@ import { useNavigate , Link} from "react-router-dom";
 import { Input, Button } from "./index";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import useForm from "react-hook-form"
+import {useForm }from "react-hook-form"
 
 function Signup (){
 const Navigate = useNavigate()

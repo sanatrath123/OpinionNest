@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "../Container";
+import { Container } from "../index";
 import LogoutBtn from "./LogoutBtn"
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 function Header(){
 
-  const  authStatus = useSelector((state)=> state.auth.status)
+  const  authStatus = useSelector((state)=> state.Auth.status)
   const navigate = useNavigate()
 
 

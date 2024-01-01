@@ -30,9 +30,9 @@ async login({email , password}){
 }
 
 //create getcurrent user 
-async getCurrentUser({email}){
+async getCurrentUser(){
 try {
-    await this.account.get({email})
+    await this.account.get()
 } catch (error) {
     console.log("ERROR IN GETCURRENTUSER",error)
 }

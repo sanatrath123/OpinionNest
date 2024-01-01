@@ -5,7 +5,7 @@ import Container from "./Container"
 import Input from "./Input"
 import Button from "./Button"
 import PostCard from "./PostCard"
-import Protected from "./Authprotection"
+import Authprotection from "./Authprotection"
 import Login from "./Login"
 import Signup from "./Signup"
 import Select from "./Select"
@@ -23,7 +23,7 @@ export {
     Input,
     Button,
     PostCard,
-    Protected,
+    Authprotection,
     Login,
     Signup,
     Select,
