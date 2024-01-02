@@ -65,7 +65,7 @@ async getPost({slug}){
 async getAllPost(quaries= Query.equal["status", "Active"]){
     try {
         return await this.databases.listDocuments(
-            conf.appwtiteDatabaseId,
+            conf.appwriteDatabaseId,
             conf.appwriteCollectionId,
             quaries
         )

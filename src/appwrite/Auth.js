@@ -47,13 +47,13 @@ return null;
 }
 
 //logout 
-async logout(){
+async logout() {
+
     try {
-        await this.account.deleteSessions()
+        await this.account.deleteSessions();
     } catch (error) {
-        console.log("ERROR IN LOGOUT METHORD")
+        console.log(" Error In Logout Service ", error);
     }
-   
 }
 
 }

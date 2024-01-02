@@ -10,8 +10,7 @@ function UploadForm({post}) {
 
  const userData = useSelector((state)=>state.Auth.UserData)
   const navigate = useNavigate()
-  const {register , handleSubmit , setValue , getValues , watch , control}
-  = useForm({
+  const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
   defaultValues: 
   {
     title: post?.title || "",
@@ -48,6 +47,7 @@ if(dbpost){
    const dbpost = await service.updatePost({...data , userId: userData.$id})
 if(dbpost){
   navigate(`/post/${dbpost.$id}`)
+}
 }
 }
 
@@ -94,7 +94,8 @@ onInput={(e)=>{
 }}
 />
 
-<RTE label="Content" control={control} defaultValue={getValues('content')}/>
+{/* <RTE label="Content" control={control} defaultValue={getValues('content')}/> */}
+<RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
  </div>
 
  <div className='w-1/3'>
@@ -135,7 +136,7 @@ className="mb-4"
 
     
   )
-}
+
 }
 
 export default UploadForm

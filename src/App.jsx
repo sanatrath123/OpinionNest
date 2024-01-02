@@ -6,14 +6,15 @@ import {login , logout} from "./store/authslice"
 import Header  from "./components/header/Header"
 import Footer from "./components/footer/Footer"
 import { Outlet } from "react-router-dom"
-
+import { useSelector } from "react-redux"
 
 
 
 function App() {
   const [loader, setloader]= useState(true)
   const dispatch = useDispatch()
-
+ const authStatus = useSelector(state=>state.Auth.authStatus)
+ console.log("authStatus value ",authStatus)
   useEffect(()=>{
 authservice.getCurrentUser()
   .then((UserData)=>{

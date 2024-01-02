@@ -8,7 +8,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import {Authprotection} from './components/index.js'
 
 //import all pages 
-import AddPost from './Pages/AddPost.jsx'
+import AddPost from './Pages/AddPost'
 import AllPost from './Pages/AllPost.jsx'
 import EditPost from './Pages/EditPost.jsx'
 import Post from './Pages/Post.jsx'
@@ -38,9 +38,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/Addpost",
-        element: <Authprotection authentication={true}>
-              <AddPost />
-        </Authprotection>
+        element:<Authprotection authentication={true}>
+        <AddPost />
+  </Authprotection>
       },
 
     {
