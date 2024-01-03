@@ -28,12 +28,15 @@ if(post){
 const fileId = file.$id
 
  if(file){
+  console.log("come upload")
   await service.deleteFile(post.featuredImage)
+  console.log("photo uploaded")
  }
 
  const dbpost = await service.updatePost(post.$id ,
  { ...data , featuredImage: file?fileId : undefined})
 if(dbpost){
+  console.log("come to navigation")
   navigate(`/post/${dbpost.$id}`)
 }
 }
@@ -94,18 +97,19 @@ onInput={(e)=>{
 }}
 />
 
-{/* <RTE label="Content" control={control} defaultValue={getValues('content')}/> */}
+
 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
  </div>
 
- <div className='w-1/3'>
-<Input 
-type="image"
-label="UPLOAD"
-placeholder = "FILE"
-accept="image/png, image/jpg, image/jpeg, image/gif"
-{...register("image",{required: true})}
-/>
+ <div className="w-1/3 px-2">
+
+<Input
+                    label="Featured Image :"
+                    type="file"
+                    className="mb-4"
+                    accept="image/png, image/jpg, image/jpeg, image/gif"
+                    {...register("jpg", { required: !post })}
+                />
 {
   post && (
     <div className='w-full mb-4'>
@@ -114,8 +118,9 @@ accept="image/png, image/jpg, image/jpeg, image/gif"
   alt= {post.title}
   className="rounded-lg"
   />
-</div>)
-}
+</div>
+)}
+ 
 
 <Select
 options={["active", "inactive"]}
