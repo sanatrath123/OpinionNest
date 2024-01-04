@@ -23,6 +23,7 @@ function UploadForm({post}) {
 
 
 const Submit = async ({data})=>{
+  console.log("data is ", data)
 if(post){
   const file=data.image[0]? await service.uploadFile(data.image[0]) :undefined
 const fileId = file.$id
@@ -42,8 +43,9 @@ if(dbpost){
 }
 //if a new file is created
    else{
+ 
    const file = data.image[0] ? await service.uploadFile(data.image[0]): undefined
-  
+   
   const fileId = file.$id
   data.featuredImage = fileId
 
@@ -53,6 +55,8 @@ if(dbpost){
 }
 }
 }
+
+
 
 const slugTransform = useCallback((value) => {
   if (value && typeof value === "string")
@@ -78,64 +82,51 @@ useEffect(()=>{
   return (
     
  <form onSubmit={handleSubmit(Submit)} className='flex flex-wrap bg-pink-100'>
- <div className='w-2/3 bg-pink-200  m-1 p-1'>
-<Input
-label="TITLE"
-className="bg-gray-400 mb-4"
-placeholder="ENETR THE HEADING"
-{...register("title", {required: true})}
-
-/>
-
-<Input
-label="slug"
-className="mb-4"
-placeholder="url"
-{...register("content",{required: true})}
-onInput={(e)=>{
-  setValue("slug", slugTransform(e.currentTarget.value), {shouldValidate: true})
-}}
-/>
-
-
-<RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
- </div>
-
- <div className="w-1/3 px-2">
-
-<Input
+ <div className="w-2/3 px-2">
+                <Input
+                    label="Title :"
+                    placeholder="Title"
+                    className="mb-4"
+                    {...register("title", { required: true })}
+                />
+                <Input
+                    label="Slug :"
+                    placeholder="Slug"
+                    className="mb-4"
+                    {...register("slug", { required: true })}
+                    onInput={(e) => {
+                        setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
+                    }}
+                />
+                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+            </div>
+            <div className="w-1/3 px-2">
+                <Input
                     label="Featured Image :"
                     type="file"
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("jpg", { required: !post })}
+                    {...register("image", { required: !post })}
                 />
-{
-  post && (
-    <div className='w-full mb-4'>
-  <img 
-  src= {service.getFilePreview(post.featuredImage)}
-  alt= {post.title}
-  className="rounded-lg"
-  />
-</div>
-)}
- 
-
-<Select
-options={["active", "inactive"]}
-label="Status"
-className="mb-4"
-{...register("status", { required: true })}
-/>
-<Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-{post ? "Update" : "Submit"}
-</Button>
-
-
-
- </div>
-
+ {post && (
+                    <div className="w-full mb-4">
+                        <img
+                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            alt={post.title}
+                            className="rounded-lg"
+                        />
+                    </div>
+                )}
+                <Select
+                    options={["active", "inactive"]}
+                    label="Status"
+                    className="mb-4"
+                    {...register("status", { required: true })}
+                />
+                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                    {post ? "Update" : "Submit"}
+                </Button>
+            </div>
 
  </form>
 

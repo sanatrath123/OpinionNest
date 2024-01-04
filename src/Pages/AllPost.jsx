@@ -4,13 +4,13 @@ import {PostCard , Container} from '../components/index'
 
 function AllPost() {
 
-  const [posts , setPosts] = useState(null)
+  const [posts , setPosts] = useState()
   useEffect(()=>{},[])
 
 service.getAllPost([])
   .then((posts)=>{
     if(posts){
-      setPosts(posts)
+      setPosts(posts.documents)
     }
     else{
       null
@@ -21,11 +21,12 @@ service.getAllPost([])
    <div className='w-full p-8'>
 <Container>
 <div className='flex flex-wrap'>
-{posts.map((post)=>(
+{posts ? posts.map((post)=>(
  <div key={post.$id} className=' p-1 w-1/4'>
-<PostCard post={post} />
+<PostCard {...post} />
  </div>
-))}
+)) : <div>
+  <h1 className='text-orange-700'>NO POST YET</h1></div>}
 </div>
 </Container>
 
