@@ -13,8 +13,8 @@ import { useSelector } from "react-redux"
 function App() {
   const [loader, setloader]= useState(true)
   const dispatch = useDispatch()
- const authStatus = useSelector(state=>state.Auth.authStatus)
- console.log("authStatus value ",authStatus)
+ const authStatus = useSelector(state=>state.auth.status)
+
   useEffect(()=>{
 authservice.getCurrentUser()
   .then((UserData)=>{

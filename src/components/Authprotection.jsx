@@ -9,7 +9,7 @@ function Protected ({children , authentication= true}){
    
 const Navigate = useNavigate()
 const [loader , setLoader] = useState(true)
-const authStatus = useSelector(state=>state.Auth.status)
+const authStatus = useSelector(state=>state.auth.status)
 
 
 

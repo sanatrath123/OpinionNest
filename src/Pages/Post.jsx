@@ -6,9 +6,9 @@ import parse from "html-react-parser";
 import service from '../appwrite/Config';
 
 function Post() {
- const [post , setPost]= useState()
+ const [post , setPost]= useState(null)
  const navigate = useNavigate()
- const UserData = useSelector((state)=>state.Auth.UserData)
+ const UserData = useSelector((state)=>state.auth.userData)
  const {slug}= useParams()
 
 const isAuthor = post && UserData ? UserData.$id === post.userId  : false
@@ -19,6 +19,7 @@ if(slug){
           .then((post)=>{
             if(post){
               setPost(post)
+              console.log(post)
             }
           })
 } else {
@@ -26,8 +27,8 @@ if(slug){
 }
  },[slug ,navigate])
 
- const DeletePost = (slug)=>{
-  service.deleteFile({slug})
+ const DeletePost = (fileids)=>{
+  service.deleteFile(fileids)
         .then((status)=>{
           if(status){
             service.deleteFile(post.featuredImage)
@@ -42,7 +43,7 @@ if(slug){
     <div className='py-8'>
 <Container>
 <div className='"w-full flex justify-center mb-4 relative border rounded-xl p-2'>
-<img src= {service.getFilePreview(post.featuredImage)}
+<img src= {service.getFilePreview(post.featuredimage)}
  alt={post.title}
  className='rounded-xl' />
 
@@ -54,7 +55,8 @@ if(slug){
   </Button>
     </Link>
 
-    <Button onClick={DeletePost} className='text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900'> Delete</Button>
+    <Button onClick={()=>{const fileids = post.$id
+    DeletePost(fileids)}} className='text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900'> Delete</Button>
   </div>
 )}
 

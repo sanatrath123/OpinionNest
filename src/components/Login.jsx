@@ -14,19 +14,20 @@ function Login(){
     const [error , setError] = useState("")
 
 // handelsubmit function 
-const login = async (data)=>{
+const Login = async (data)=>{
     setError(null)
-    console.log("start login")
+    
   try {
     const session = await authservice.login(data)
-    console.log(" data came from auth.js")
+    
     if(session) {
-        const userdata = await authservice.getCurrentUser()
-        console.log(" user Logedin")
-    if(userdata){
-        dispatch(authlogin(userdata))
+        const userData = await authservice.getCurrentUser()
+       
+    if(userData){
+      console.log("dispatch aa raha hai bhai",userData ,"han yar")
+        dispatch(authlogin(userData))
         Navigate("/")
-        console.log(" login End")
+       
     }
     }
   } catch (error) {
@@ -46,7 +47,7 @@ const login = async (data)=>{
 
  {error && <h2 className="text-red-600 text-center text-lg">{error}</h2>}
        
-       <form onSubmit={handleSubmit(login)} className="mt-8">
+       <form onSubmit={handleSubmit(Login)} className="mt-8">
         <div className="space-y-5">
        <Input
         type="email"

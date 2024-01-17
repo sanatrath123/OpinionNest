@@ -42,7 +42,7 @@ try {
  catch (error) {
     console.log("ERROR IN GET CURRENT USER",error)
 }
-console.log("End")
+
 return null;
 }
 

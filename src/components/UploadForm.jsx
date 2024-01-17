@@ -1,4 +1,4 @@
-import React ,{useCallback, useEffect}from 'react'
+import {useCallback, useEffect}from 'react'
 import {Input , Button , RTE , Select} from '../components/index'
 import {useForm} from 'react-hook-form'
 import service from '../appwrite/Config'
@@ -8,7 +8,10 @@ import { useNavigate  } from 'react-router-dom'
 
 function UploadForm({post}) {
 
- const userData = useSelector((state)=>state.Auth.UserData)
+  const userData = useSelector((state) => state.auth.userData);
+
+console.log(userData)
+
   const navigate = useNavigate()
   const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
   defaultValues: 
@@ -22,38 +25,44 @@ function UploadForm({post}) {
 
 
 
-const Submit = async ({data})=>{
+const Submit = async (data)=>{
   console.log("data is ", data)
 if(post){
   const file=data.image[0]? await service.uploadFile(data.image[0]) :undefined
-const fileId = file.$id
+
 
  if(file){
-  console.log("come upload")
-  await service.deleteFile(post.featuredImage)
-  console.log("photo uploaded")
+  const fileId = file.$id
+  await service.deleteFile(post.featuredimage)
+  const dbpost = await service.updatePost(post.$id ,
+    { ...data , featuredimage: file? fileId : undefined})
+    if(dbpost){
+ 
+      navigate(`/post/${dbpost.$id}`)
+    }
  }
 
- const dbpost = await service.updatePost(post.$id ,
- { ...data , featuredImage: file?fileId : undefined})
-if(dbpost){
-  console.log("come to navigation")
-  navigate(`/post/${dbpost.$id}`)
-}
 }
 //if a new file is created
-   else{
- 
-   const file = data.image[0] ? await service.uploadFile(data.image[0]): undefined
-   
-  const fileId = file.$id
-  data.featuredImage = fileId
-
-   const dbpost = await service.updatePost({...data , userId: userData.$id})
-if(dbpost){
-  navigate(`/post/${dbpost.$id}`)
-}
-}
+   else {
+    const file = data.image[0] ? await service.uploadFile(data.image[0]) : undefined;
+  
+    if (file && file.$id) {
+      console.log("file created", file);
+  
+      const fileId = file.$id;
+      data.featuredimage = fileId;
+      console.log(data)
+      console.log(userData.$id)
+      const dbpost = await service.createPost({...data ,userId: userData.$id});
+  
+      console.log("dbpost created", dbpost);
+  
+      if (dbpost && dbpost.$id) {
+        navigate(`/post/${dbpost.$id}`);
+      } 
+    } 
+  }
 }
 
 
@@ -111,7 +120,7 @@ useEffect(()=>{
  {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={service.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
@@ -136,5 +145,3 @@ useEffect(()=>{
 }
 
 export default UploadForm
-
-

@@ -7,7 +7,7 @@ function AllPost() {
   const [posts , setPosts] = useState()
   useEffect(()=>{},[])
 
-service.getAllPost([])
+service.getPosts([])
   .then((posts)=>{
     if(posts){
       setPosts(posts.documents)
