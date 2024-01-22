@@ -24,7 +24,7 @@ const Login = async (data)=>{
         const userData = await authservice.getCurrentUser()
        
     if(userData){
-      console.log("dispatch aa raha hai bhai",userData ,"han yar")
+      
         dispatch(authlogin(userData))
         Navigate("/")
        
@@ -43,7 +43,7 @@ const Login = async (data)=>{
         <div className="w-full bg-sky-300 shadow-2xl flex items-center justify-center">
              <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
  
- <Link to={`/Singup`}> <p>DONT HAVE AN ACCOUNT</p>  </Link>
+ <Link to={`/Signup`}> <p>DONT HAVE AN ACCOUNT</p>  </Link>
 
  {error && <h2 className="text-red-600 text-center text-lg">{error}</h2>}
        

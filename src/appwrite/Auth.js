@@ -11,10 +11,12 @@ constructor(){
     this.account = new Account(this.client)
 }
 //create sign up method inside the class 
-async createAccount({email , password ,name}){
+async createAccount(data){
+    const {email , name , password}= data
+    console.log(email ,password ,name)
     try {
         const UserAccount = await this.account.create(ID.unique(), email , password , name)
-        return UserAccount? this.login() :null
+        return UserAccount
     } catch (error) {
         console.log("ERROR IN SIGNUP METHORD ",error)
     }

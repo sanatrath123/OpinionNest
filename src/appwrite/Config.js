@@ -15,7 +15,7 @@ export class Service{
     }
 
     async createPost({title, slug, content, featuredimage, status, userId}){
-        console.log(title, slug, content, featuredimage, status, userId) //values are also comming
+       
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
@@ -112,9 +112,11 @@ export class Service{
             return false
         }
     }
-
     async deleteFile(fileId){
+        console.log(fileId)
         try {
+            console.log("try block")
+            console.log(conf.appwriteBucketId,fileId)
             await this.bucket.deleteFile(
                 conf.appwriteBucketId,
                 fileId
@@ -127,12 +129,14 @@ export class Service{
     }
 
     getFilePreview(fileId){
+        console.log("called",fileId)
         return this.bucket.getFilePreview(
             conf.appwriteBucketId,
            fileId
         )
     }
 }
+
 
 
 const service = new Service()

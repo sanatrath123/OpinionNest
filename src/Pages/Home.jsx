@@ -6,13 +6,14 @@ function Home() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-      service.getPosts().then((posts) => {
+      service.getPosts([]).then((posts) => {
           if (posts) {
+            console.log(posts)
               setPosts(posts.documents)
           }
       })
   }, [])
-
+  
   if (posts.length === 0) {
     return (
         <div className="w-full py-8 mt-4 text-center">
@@ -28,15 +29,16 @@ function Home() {
         </div>
     )
 }
-
+console.log(posts)
   return (
     <div className='w-full py-8 mt-4 text-center'>
 <Container>
 <div className='flex flex-wrap'>
 {posts.map((post)=>(
 <div key={post.$id} className='w-1/4 p-1'>
-<PostCard post={post} />
+<PostCard {...post} />
 </div>
+ 
 ))}
 </div>
 

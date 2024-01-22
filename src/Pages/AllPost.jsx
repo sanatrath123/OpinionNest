@@ -9,6 +9,7 @@ function AllPost() {
 
 service.getPosts([])
   .then((posts)=>{
+    console.log(posts)
     if(posts){
       setPosts(posts.documents)
     }
@@ -16,6 +17,7 @@ service.getPosts([])
       null
     }
   })
+  console.log("this is real post",posts)
 
   return (
    <div className='w-full p-8'>

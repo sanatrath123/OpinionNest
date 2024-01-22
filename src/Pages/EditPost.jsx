@@ -6,7 +6,7 @@ import { Container ,UploadForm } from '../components/index'
 
 function EditPost() {
 
-  const [post , setPost]= useState(null)
+  const [post , setPost]= useState('')
   const navigate = useNavigate()
   const {slug} = useParams()
   useEffect(()=>{
@@ -21,7 +21,6 @@ if(slug){
   navigate('/')
 }
   },[slug , navigate])
-
 
   return post ? (
   <div className='py-8'>

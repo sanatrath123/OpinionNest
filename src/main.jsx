@@ -62,7 +62,7 @@ const router = createBrowserRouter([
       </Authprotection>
     } ,
     {
-      path: "/Singup",
+      path: "/Signup",
       element: <Authprotection authentication={false}>
             <Signup />
       </Authprotection>

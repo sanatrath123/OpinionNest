@@ -10,14 +10,13 @@ function UploadForm({post}) {
 
   const userData = useSelector((state) => state.auth.userData);
 
-console.log(userData)
 
   const navigate = useNavigate()
   const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
   defaultValues: 
   {
     title: post?.title || "",
-    slug: post?.slug || "",
+    slug: post?.featuredimage || "",
     content: post?.content || "",
     status: post?.status || "active"
   }
@@ -26,10 +25,11 @@ console.log(userData)
 
 
 const Submit = async (data)=>{
-  console.log("data is ", data)
+ console.log("Enter in form")
 if(post){
+  console.log("hi from if ")
   const file=data.image[0]? await service.uploadFile(data.image[0]) :undefined
-
+console.log("hi from edit")
 
  if(file){
   const fileId = file.$id
@@ -45,6 +45,7 @@ if(post){
 }
 //if a new file is created
    else {
+   console.log("hi from else ")
     const file = data.image[0] ? await service.uploadFile(data.image[0]) : undefined;
   
     if (file && file.$id) {
@@ -114,13 +115,13 @@ useEffect(()=>{
                     label="Featured Image :"
                     type="file"
                     className="mb-4"
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
+                    accept="image/png, image/jpg, image/jpeg, image/gif , video/mp4"
                     {...register("image", { required: !post })}
                 />
  {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={service.getFilePreview(post.featuredImage)}
+                            src={service.getFilePreview(post.featuredimage)}
                             alt={post.title}
                             className="rounded-lg"
                         />

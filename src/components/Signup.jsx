@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react'
-import authService from '../appwrite/auth'
+import authservice from '../appwrite/auth'
 import {Link ,useNavigate} from 'react-router-dom'
 import {login} from '../store/authSlice'
 import {Button, Input} from './index.js'
@@ -14,13 +14,16 @@ function Signup() {
     const {register, handleSubmit} = useForm()
 
     const create = async(data) => {
-        setError("")
+        setError(null)
+      console.log(data)
         try {
-            const userData = await authService.createAccount(data)
+            console.log("Enter into try")
+            const userData = await authservice.createAccount(data)
+            console.log(userData)
             if (userData) {
-                const userData = await authService.getCurrentUser()
-                if(userData) dispatch(login(userData));
-                navigate("/")
+                const userData = await authservice.getCurrentUser()
+             dispatch(login(userData));
+               
             }
         } catch (error) {
             setError(error.message)
@@ -38,7 +41,7 @@ function Signup() {
                         to="/login"
                         className="font-medium text-primary transition-all duration-200 hover:underline"
                     >
-                        <Login></Login>
+                       Login
                     </Link>
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
