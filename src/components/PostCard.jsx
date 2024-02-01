@@ -5,7 +5,6 @@ import service from '../appwrite/Config'
 function PostCard(props) {
   
               const {$id , featuredimage , title }  = props
-  console.log("this is featuredimage",$id)
   return (
     <Link to={`/post/${$id}`} className="block mb-4 max-w-sm overflow-hidden border border-gray-300 rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 transform hover:scale-105">
       <img className="w-full h-48 object-cover" src={service.getFilePreview(featuredimage)} alt={title} />

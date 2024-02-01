@@ -126,7 +126,7 @@ export class Service{
             console.log("Appwrite serive :: deleteFile :: error", error);
             return false
         }
-    }
+    } 
 
     getFilePreview(fileId){
         console.log("called",fileId)
@@ -141,3 +141,5 @@ export class Service{
 
 const service = new Service()
 export default service
+ 
+ 
