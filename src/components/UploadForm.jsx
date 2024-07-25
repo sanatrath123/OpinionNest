@@ -86,7 +86,7 @@ useEffect(()=>{
 
   return (
     
- <form onSubmit={handleSubmit(Submit)} className='flex flex-wrap bg-pink-100'>
+ <form onSubmit={handleSubmit(Submit)} className='flex flex-wrap bg-pink-100 dark:bg-slate-500'>
  <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
@@ -103,7 +103,7 @@ useEffect(()=>{
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                <RTE className="dark:bg-slate-600 dark:text-gray-100" label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
             <div className="w-1/3 px-2">
                 <Input

@@ -3,7 +3,7 @@ import { Container } from "../index";
 import LogoutBtn from "./LogoutBtn"
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import Darkmode from "./Darkmode";
 
 
 function Header(){
@@ -46,7 +46,7 @@ const NavItem = [
 
 
     return(
-        <header className='py-3 shadow bg-blue-600'>
+        <header className='py-3 shadow dark:bg-slate-700 bg-blue-600 text-xl font-semibold'>
           <Container>
             <nav className="flex">
          {/* add a logo */}
@@ -54,7 +54,7 @@ const NavItem = [
  {
  NavItem.map((item)=>(
         item.active ? 
-        <li key={item.Name}>
+        <li key={item.Name} className="dark:text-gray-100">
         <button className="inline-bock px-6 py-2 duration-200 hover:bg-violet-500 rounded-full"
         onClick={()=>Navigate(item.slug)}>
             {item.Name}
@@ -65,6 +65,8 @@ const NavItem = [
   {authStatus && <li>
     <LogoutBtn/>
     </li>}
+
+    <li className="ml-3"><Darkmode/></li>
           </ul>
             </nav>
           </Container>

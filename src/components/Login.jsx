@@ -40,7 +40,7 @@ const Login = async (data)=>{
 
 
     return(
-        <div className="w-full bg-sky-300 shadow-2xl flex items-center justify-center">
+        <div className="w-full dark:bg-slate-800 dark:text-gray-100 bg-sky-300 shadow-2xl flex items-center justify-center">
              <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
  
  <Link to={`/Signup`}> <p>DONT HAVE AN ACCOUNT</p>  </Link>
