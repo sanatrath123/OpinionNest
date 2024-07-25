@@ -12,11 +12,7 @@ function LogoutBtn (){
    const value = authService.logout()
    console.log("session going on")
      if(value){
-      value.then(()=> {
-         console.log("dispatched to state")
-         dispatch(logout())
-         console.log("state updated")
-     })
+     dispatch(logout())
      }
  }
     return(

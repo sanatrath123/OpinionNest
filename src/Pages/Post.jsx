@@ -12,6 +12,14 @@ function Post() {
   const { slug } = useParams();
 
   const isAuthor = post && UserData ? UserData.$id === post.userId : false;
+  let url 
+
+  const show = ()=>{
+    console.log("this is post" , post)
+   url = `${service.getFileView(post?.featuredimage)}&mode=admin`
+    console.log(url)
+  }
+
 
   useEffect(() => {
     if (slug) {
@@ -46,11 +54,17 @@ function Post() {
       <Container>
         <div className='"w-full flex justify-center mb-4 relative border rounded-xl p-2'>
           
-            <img
+            {/* <img
               src={service.getFilePreview(post.featuredimage)}
               alt={post.title}
               className='rounded-xl max-w-[600px]'
-            />
+            /> */}
+
+          <video controls width={320} height={240}>
+            <source src={`${service.getFileView(post?.featuredimage)}&mode=admin`} type="video/mp4"></source>
+          </video>
+
+
           
 
           {isAuthor && (

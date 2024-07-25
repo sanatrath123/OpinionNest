@@ -135,6 +135,18 @@ export class Service{
            fileId
         )
     }
+
+
+    //get file view 
+ getFileView(fileId ){
+const url =  this.bucket.getFileView(
+    conf.appwriteBucketId , fileId
+)
+
+if(url){
+    console.log(url)
+  return  url}
+    }
 }
 
 

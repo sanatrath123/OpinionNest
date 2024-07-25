@@ -25,19 +25,14 @@ function UploadForm({post}) {
 
 
 const Submit = async (data)=>{
- console.log("Enter in form")
 if(post){
-  console.log("hi from if ")
   const file=data.image[0]? await service.uploadFile(data.image[0]) :undefined
-console.log("hi from edit")
-
  if(file){
   const fileId = file.$id
   await service.deleteFile(post.featuredimage)
   const dbpost = await service.updatePost(post.$id ,
     { ...data , featuredimage: file? fileId : undefined})
     if(dbpost){
- 
       navigate(`/post/${dbpost.$id}`)
     }
  }
@@ -45,7 +40,7 @@ console.log("hi from edit")
 }
 //if a new file is created
    else {
-   console.log("hi from else ")
+  
     const file = data.image[0] ? await service.uploadFile(data.image[0]) : undefined;
   
     if (file && file.$id) {

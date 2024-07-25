@@ -5,9 +5,10 @@ import {PostCard , Container} from '../components/index'
 function AllPost() {
 
   const [posts , setPosts] = useState()
-  useEffect(()=>{},[])
 
-service.getPosts([])
+
+  useEffect(()=>{
+    service.getPosts([])
   .then((posts)=>{
     console.log(posts)
     if(posts){
@@ -17,6 +18,9 @@ service.getPosts([])
       null
     }
   })
+  },[])
+
+
   console.log("this is real post",posts)
 
   return (
