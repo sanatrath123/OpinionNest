@@ -1,8 +1,8 @@
 
 import React, {useState} from 'react'
-import authservice from '../appwrite/auth'
+import authAPI from '../appwrite/Auth.js'
 import {Link ,useNavigate} from 'react-router-dom'
-import {login} from '../store/authSlice'
+import {login} from '../store/authslice.js'
 import {Button, Input} from './index.js'
 import {useDispatch} from 'react-redux'
 import {useForm} from 'react-hook-form'
@@ -15,13 +15,14 @@ function Signup() {
 
     const create = async(data) => {
         setError(null)
-      console.log(data)
+  
         try {
             console.log("Enter into try")
-            const userData = await authservice.createAccount(data)
+            
+            const userData = await authAPI.createAccount(data)
             console.log(userData)
             if (userData) {
-                const userData = await authservice.getCurrentUser()
+                const userData = await authAPI.getCurrentUser()
              dispatch(login(userData));
                
             }

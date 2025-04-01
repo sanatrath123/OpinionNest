@@ -1,5 +1,5 @@
 import React , {useEffect, useState} from 'react'
-import service from '../appwrite/Config'
+import postAPI from '../appwrite/Config'
 import {PostCard , Container} from '../components/index'
 
 function AllPost() {
@@ -8,7 +8,7 @@ function AllPost() {
 
 
   useEffect(()=>{
-    service.getPosts([])
+    postAPI.getPosts([])
   .then((posts)=>{
     console.log(posts)
     if(posts){

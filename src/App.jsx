@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import './App.css'
-import authservice from "./appwrite/Auth"
+import authAPI from "./appwrite/Auth"
 import {login , logout} from "./store/authslice"
 import Header  from "./components/header/Header"
 import Footer from "./components/footer/Footer"
@@ -17,9 +17,11 @@ function App() {
 const theme = useSelector((state)=>state.theme.mode)
 
   useEffect(()=>{
-authservice.getCurrentUser()
+    
+authAPI.getCurrentUser()
   .then((UserData)=>{
-    if(UserData)
+   
+    if(!UserData.err)
    { dispatch(login(UserData))}
    else{
 dispatch(logout())

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import service from '../appwrite/Config'
+import postAPI from '../appwrite/Config'
 import { useParams ,useNavigate } from 'react-router-dom'
 import { Container ,UploadForm } from '../components/index'
 
@@ -11,7 +11,7 @@ function EditPost() {
   const {slug} = useParams()
   useEffect(()=>{
 if(slug){
-  service.getPost({slug})
+  postAPI.getPost({slug})
   .then((post)=>{
     if(post){
       setPost(post)

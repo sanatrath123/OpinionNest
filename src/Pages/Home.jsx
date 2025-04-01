@@ -1,20 +1,20 @@
 import React,{useState ,useEffect} from 'react'
-import service from '../appwrite/Config'
+import postAPI from '../appwrite/Config'
 import {PostCard , Container} from '../components/index'
 
 function Home() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-      service.getPosts([]).then((posts) => {
+      postAPI.getPosts([]).then((posts) => {
           if (posts) {
-            console.log(posts)
-              setPosts(posts.documents)
+              setPosts(posts)
           }
       })
   }, [])
+
   
-  if (posts.length === 0) {
+  if (posts?.length === 0) {
     return (
         <div className="w-full py-8 mt-4 text-center">
             <Container>
@@ -33,15 +33,14 @@ console.log(posts)
   return (
     <div className='w-full py-8 mt-4 text-center'>
 <Container>
-<div className='flex flex-wrap'>
+<div className='flex w-full flex-col items-center bg-pink-600 '>
 {posts.map((post)=>(
-<div key={post.$id} className='w-1/4 p-1'>
+<div key={post.id} className='lg:w-2/4 w-3/4  p-1'>
 <PostCard {...post} />
 </div>
  
 ))}
 </div>
-
 </Container>
     </div>
   )

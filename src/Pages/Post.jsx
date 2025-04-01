@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Button, Container } from '../components/index';
 import parse from 'html-react-parser';
-import service from '../appwrite/Config';
+import postAPI from '../appwrite/Config';
 
 function Post() {
   const [post, setPost] = useState(null);
@@ -16,14 +16,14 @@ function Post() {
 
   const show = ()=>{
     console.log("this is post" , post)
-   url = `${service.getFileView(post?.featuredimage)}&mode=admin`
+   url = `${postAPI.getFileView(post?.featuredimage)}&mode=admin`
     console.log(url)
   }
 
 
   useEffect(() => {
     if (slug) {
-      service.getPost({ slug }).then((post) => {
+      postAPI.getPost({ slug }).then((post) => {
         if (post) {
           setPost(post);
           console.log(post);
@@ -38,10 +38,10 @@ function Post() {
     console.log(post);
 
     try {
-      const deleteFileStatus = await service.deleteFile(post.$id);
+      const deleteFileStatus = await postAPI.deleteFile(post.$id);
 
       if (deleteFileStatus) {
-        await service.deleteFile(post.featuredimage);
+        await postAPI.deleteFile(post.featuredimage);
         navigate('/');
       }
     } catch (error) {
@@ -55,13 +55,13 @@ function Post() {
         <div className='"w-full flex justify-center mb-4 relative border rounded-xl p-2'>
           
             {/* <img
-              src={service.getFilePreview(post.featuredimage)}
+              src={postAPI.getFilePreview(post.featuredimage)}
               alt={post.title}
               className='rounded-xl max-w-[600px]'
             /> */}
 
           <video controls width={320} height={240}>
-            <source src={`${service.getFileView(post?.featuredimage)}&mode=admin`} type="video/mp4"></source>
+            <source src={`${postAPI.getFileView(post?.featuredimage)}&mode=admin`} type="video/mp4"></source>
           </video>
 
 

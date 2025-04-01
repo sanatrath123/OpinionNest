@@ -1,21 +1,12 @@
-import { Client, Account ,ID} from 'appwrite';
 import conf from '../conf/conf'
 
-class AuthService {
-client=new Client()
-account 
-
-constructor(){
-   this.client.setEndpoint(conf.appwriteUrl)
-              .setProject(conf.appwriteProjectId)
-    this.account = new Account(this.client)
-}
+const serverUrl = `${conf.serverUrl}/user`
+class AuthAPI {
 //create sign up method inside the class 
-async createAccount(data){
-    const {email , name , password}= data
-    console.log(email ,password ,name)
+async createAccount({email , name , password}){
     try {
-        const UserAccount = await this.account.create(ID.unique(), email , password , name)
+        const res = await fetch(`${serverUrl}/signup` , {method:"POST", body:JSON.stringify({email , name , password}) , headers:{"Content-Type":"application/json"}, credentials:'include'})
+        const UserAccount = await res.json()
         return UserAccount
     } catch (error) {
         console.log("ERROR IN SIGNUP METHORD ",error)
@@ -25,7 +16,10 @@ async createAccount(data){
 //create login methord 
 async login({email , password}){
     try {
-      return  await this.account.createEmailSession(email, password)
+      const res = await fetch(`${serverUrl}/login` , {method:"POST", body:JSON.stringify({email, password}) , headers:{
+        "Content-Type":"application/json"
+      }, credentials:'include'})
+      return await res.json()
     } catch (error) {
         console.log("ERROR IN LOGIN METHORD",error)
     }
@@ -35,30 +29,29 @@ async login({email , password}){
 async getCurrentUser(){
 try { 
     
-   const User= await this.account.get()
-   if(User){
-    console.log(User)
-    return User
+   const res= await fetch(`${serverUrl}/userdata`, {credentials:'include'})
+   const user = await res.json()
+   if(user){
+    return user
    }
 }
  catch (error) {
     console.log("ERROR IN GET CURRENT USER",error)
 }
-
 return null;
 }
 
 //logout 
 async logout() {
-
     try {
-        await this.account.deleteSessions();
+        const res = await fetch(`${serverUrl}/logout`, {method:"POST", credentials:'include'})
+     if(res.status==200) return true
     } catch (error) {
-        console.log(" Error In Logout Service ", error);
+        console.log(" Error In Logout postAPI ", error);
     }
 }
 
 }
 
-const authservice = new AuthService()
-export default authservice;
+const authAPI = new AuthAPI()
+export default authAPI;

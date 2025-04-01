@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link , useNavigate } from "react-router-dom"
 import {Input , Button } from "./index"
 import {login as authlogin} from "../store/authslice"
-import authservice from "../appwrite/Auth"
+import authAPI from "../appwrite/Auth"
 import { useDispatch } from "react-redux"
 import { useForm} from "react-hook-form"
 
@@ -16,20 +16,14 @@ function Login(){
 // handelsubmit function 
 const Login = async (data)=>{
     setError(null)
-    
   try {
-    const session = await authservice.login(data)
-    
-    if(session) {
-        const userData = await authservice.getCurrentUser()
-       
-    if(userData){
-      
-        dispatch(authlogin(userData))
-        Navigate("/")
-       
-    }
-    }
+  const res = await authAPI.login(data)
+  if(res.message){
+    const userData = await authAPI.getCurrentUser()
+    console.log(userData)
+    dispatch(authlogin(userData))
+    Navigate("/")
+  }
   } catch (error) {
     setError(error.message)
   }
