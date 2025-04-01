@@ -42,7 +42,6 @@ const router = createBrowserRouter([
         <AddPost />
   </Authprotection>
       },
-
     {
       path: `/Edit-Post/:slug`,
       element: <Authprotection authentication={true}>
@@ -50,7 +49,7 @@ const router = createBrowserRouter([
       </Authprotection>
     },
     {
-         path: "/post/:slug",
+         path: "/post/:id",
          element: <Authprotection authentication={true}>
            <Post />
          </Authprotection>

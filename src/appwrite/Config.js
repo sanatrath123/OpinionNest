@@ -2,7 +2,7 @@ import conf from '../conf/conf.js';
 
 
 const serverurl = `${conf.serverUrl}/post`
-export class PostAPI{
+ class PostAPI{
  
     async createPost(data){
         const formData = new FormData()
