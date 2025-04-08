@@ -1,7 +1,7 @@
 import {useCallback, useEffect}from 'react'
 import {Input , Button , RTE , Select} from '../components/index'
 import {useForm} from 'react-hook-form'
-import postAPI from '../appwrite/Config'
+import postAPI from '../backend/Config'
 import { useSelector } from 'react-redux'
 import { useNavigate  } from 'react-router-dom'
 

@@ -1,6 +1,6 @@
 
 import { useDispatch } from "react-redux";
-import authAPI from "../../appwrite/Auth"
+import authAPI from "../../backend/Auth"
 import {logout} from "../../store/authslice"
 import Button from "../Button"
 

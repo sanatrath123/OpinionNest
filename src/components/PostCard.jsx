@@ -7,17 +7,33 @@ import { BsBookmarksFill } from "react-icons/bs";
 import conf from '../conf/conf.js'
 import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux"
+import postAPI from '../backend/Config.js';
 
 function PostCard(postData) {
   const photosNumber = [...Array(postData.filesInfo.length)].map((d,i)=>i)
 const [activePic , setActivePic] = useState(0)
 const {id,TotalLikes, TotalDownVote ,TotalSaves , createdAt,content ,title, likes,savedUsers ,downVote} = postData
 const userData = useSelector((state)=>state.auth.userData)
+const userId = userData.id
 const handlePicChange=(type)=>{
 if(type=="next"){
  return photosNumber.length==activePic ? null :setActivePic(activePic+1)
 }
 return activePic==0 ? null :setActivePic(activePic-1)
+}
+
+//handle the like down and save related data to the user in the ui level
+const defaultUserInfo = {like:{ status:likes.includes(userId) , total:TotalLikes}, dislike:{ status:downVote.includes(userId) , total:TotalDownVote} , save:{status:savedUsers.includes(userId) , total:TotalSaves}}
+const [userPostInfo, setUserPostInfo ] = useState(defaultUserInfo)
+
+
+//handle the ui level like save and downvotes
+const handlePostAction = async (action)=>{
+ const data = await postAPI.updateLike_Down_Save_Post(id, action)
+  setUserPostInfo((prev)=>{
+   return {...prev ,[action]:userPostInfo?.[action].status ? { status:false , total:userPostInfo?.[action].total-1} : { status:true , total:userPostInfo?.[action].total+1}}
+  })
+  console.log(data)
 }
 
 
@@ -64,19 +80,21 @@ return activePic==0 ? null :setActivePic(activePic-1)
 
   <div className='flex gap-7 px-4 my-2 w-full justify-center items-center  '>
 <div className='relative'>
-<SlLike size={25} color={`${likes?.includes(userData.id)  ? "white":"gray"}`} />
-<span className=' absolute top-6 right-1/2 translate-x-1/2'>{TotalLikes}</span>
+<SlLike className='cursor-pointer' size={25} color={`${userPostInfo.like.status  ? "white":"gray"}`} onClick={()=>handlePostAction('like')} />
+<span className=' absolute top-6 right-1/2 translate-x-1/2'>{userPostInfo.like.total}</span>
 </div>
 <div className='relative'>
-<SlDislike size={25} color={`${downVote?.includes(userData.id)  ? "white":"gray"}`} />
-<span className=' absolute top-6 right-1/2 translate-x-1/2'>{TotalDownVote}</span>
+<SlDislike className='cursor-pointer' size={25} color={`${userPostInfo.dislike.status  ? "white":"gray"}`} 
+onClick={()=>handlePostAction('dislike')}  />
+<span className=' absolute top-6 right-1/2 translate-x-1/2'>{userPostInfo.dislike.total}</span>
 </div>
 <div className='relative'>
-<AiOutlineComment size={30} />
+<AiOutlineComment className='cursor-pointer' size={30} />
 </div>
 <div className='relative'>
-<BsBookmarksFill size={25} color={`${savedUsers?.includes(userData.id)  ? "blue":"gray"}`} />
-<span className=' absolute top-6 right-1/2 translate-x-1/2'>{TotalSaves}</span>
+<BsBookmarksFill className='cursor-pointer' size={25} color={`${userPostInfo?.save.status  ? "blue":"gray"}`} 
+onClick={()=>handlePostAction('save')}/>
+<span className=' absolute top-6 right-1/2 translate-x-1/2'>{userPostInfo.save.total}</span>
 </div>
 
 <button className='px-3 py-2 rounded-xl bg-sky-600'><Link to={`post/${id}`}>Read Full Blog</Link></button>

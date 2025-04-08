@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Button, Container } from '../components/index';
-import  postAPI  from '../appwrite/Config.js';
+import  postAPI  from '../backend/Config.js';
 import conf from '../conf/conf';
 
 function Post() {
@@ -10,14 +10,10 @@ function Post() {
   const navigate = useNavigate();
   const UserData = useSelector((state) => state.auth.userData);
   const { id } = useParams();
+  
   //const isAuthor = post && UserData ? UserData.$id === post.userId : false;
-  let url 
+//create like this if author came we have some additional otion for update and delete
 
-  // const show = ()=>{
-  //   console.log("this is post" , post)
-  //  url = `${postAPI.getFileView(post?.featuredimage)}&mode=admin`
-  //   console.log(url)
-  // }
 
   const GetPostData = async ()=>{
     const data = await postAPI.getPost(id)

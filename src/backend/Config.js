@@ -69,6 +69,19 @@ async updatePost(postId, {title, content}){
         }
     }
 
+    async updateLike_Down_Save_Post (postId , action){
+try {
+    const data = await fetch(`${serverurl}/${postId}/${action}`, {
+        method:"PUT", credentials:'include'
+    })
+    if(data.status!=200) return 
+    const json = await data.json()
+    return json
+} catch (error) {
+    console.log("error while like and downvote the post", error)
+}
+    }
+
 }
 
 const postAPI = new PostAPI()

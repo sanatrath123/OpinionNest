@@ -1,5 +1,5 @@
 import React,{useState ,useEffect} from 'react'
-import postAPI from '../appwrite/Config'
+import postAPI from '../backend/Config'
 import {PostCard , Container} from '../components/index'
 
 function Home() {

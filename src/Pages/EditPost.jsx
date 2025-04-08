@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import postAPI from '../appwrite/Config'
+import postAPI from '../backend/Config'
 import { useParams ,useNavigate } from 'react-router-dom'
 import { Container ,UploadForm } from '../components/index'
 

@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react'
-import authAPI from '../appwrite/Auth.js'
+import authAPI from '../backend/Auth.js'
 import {Link ,useNavigate} from 'react-router-dom'
 import {login} from '../store/authslice.js'
 import {Button, Input} from './index.js'
