@@ -35,7 +35,7 @@ setloader(false))
   return !loader ? (
 <div className={`${theme}` }>
 
-<div className="min-h-screen flex flex-wrap content-between dark:bg-gray-800 bg-purple-700">
+<div className="min-h-screen flex  flex-wrap content-between dark:bg-gray-800 bg-purple-700">
   <div className="w-full block">
     <Header/>
 <main>
