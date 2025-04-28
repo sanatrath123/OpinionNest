@@ -12,7 +12,7 @@ import postAPI from '../backend/Config.js';
 function PostCard(postData) {
   const photosNumber = [...Array(postData.filesInfo.length)].map((d,i)=>i)
 const [activePic , setActivePic] = useState(0)
-const {id,TotalLikes, TotalDownVote ,TotalSaves , createdAt,content ,title, likes,savedUsers ,downVote} = postData
+const {_id:id,TotalLikes, TotalDownVote ,TotalSaves , createdAt,content ,title, likes,savedUsers ,downVote} = postData
 const userData = useSelector((state)=>state.auth.userData)
 const userId = userData.id
 const handlePicChange=(type)=>{
@@ -23,7 +23,7 @@ return activePic==0 ? null :setActivePic(activePic-1)
 }
 
 //handle the like down and save related data to the user in the ui level
-const defaultUserInfo = {like:{ status:likes.includes(userId) , total:TotalLikes}, dislike:{ status:downVote.includes(userId) , total:TotalDownVote} , save:{status:savedUsers.includes(userId) , total:TotalSaves}}
+const defaultUserInfo = {like:{ status:likes?.includes(userId) , total:TotalLikes}, dislike:{ status:downVote?.includes(userId) , total:TotalDownVote} , save:{status:savedUsers?.includes(userId) , total:TotalSaves}}
 const [userPostInfo, setUserPostInfo ] = useState(defaultUserInfo)
 
 
